@@ -219,26 +219,27 @@ namespace NModbus.Utility
 
     }
 
-    public static class TaskHelper
-    {
-        public static Task Delay(int milliSeconds, CancellationToken cancellationToken)
-        {
-            return Task.Factory.StartNew(() => {
-                Thread.Sleep(milliSeconds);
-            });
-        }
-        public static Task Delay(int milliSeconds)
-        {
-            return Task.Factory.StartNew(() => {
-                Thread.Sleep(milliSeconds);
-            });
-        }
+    //public static class TaskHelper
+    //{
+    //    public static Task Delay(int milliSeconds, CancellationToken cancellationToken)
+    //    {
+    //        //return Task.Factory.StartNew(() => {
+    //        //    Thread.Sleep(milliSeconds);
+    //        //});
 
-        public    static Task Delay(TimeSpan milliSeconds, CancellationToken cancellationToken)
-        {
-             return  Task.Factory.StartNew(() => {
-                Thread.Sleep(milliSeconds);
-            });
-        }
-    }
+    //        return TaskEx.Delay(milliSeconds, cancellationToken);
+    //    }
+    //    public static Task Delay(int milliSeconds)
+    //    {
+    //        return TaskEx.Delay(milliSeconds);
+    //    }
+
+    //    public static Task Delay(TimeSpan milliSeconds, CancellationToken cancellationToken)
+    //    {
+    //        // return  Task.Factory.StartNew(() => {
+    //        //    Thread.Sleep(milliSeconds);
+    //        //});
+    //        return TaskEx.Delay(milliSeconds, cancellationToken);
+    //    }
+    //}
 }

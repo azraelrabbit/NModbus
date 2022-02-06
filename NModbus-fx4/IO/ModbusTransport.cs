@@ -314,7 +314,7 @@ namespace NModbus.IO
 
         private static void Sleep(int millisecondsTimeout)
         {
-            TaskHelper.Delay(millisecondsTimeout).Wait();
+            TaskEx.Delay(millisecondsTimeout).Wait();
         }
     }
 }

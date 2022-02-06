@@ -38,7 +38,7 @@ namespace NModbus.Device
             _stream = client.GetStream();
             _slaveNetwork = slaveNetwork ?? throw new ArgumentNullException(nameof(slaveNetwork));
             _modbusFactory = modbusFactory ?? throw new ArgumentNullException(nameof(modbusFactory));
-            _requestHandlerTask = Task.Factory.StartNew(() =>
+            _requestHandlerTask = TaskEx.Run(() =>
             {
 
                 return HandleRequestAsync() ;

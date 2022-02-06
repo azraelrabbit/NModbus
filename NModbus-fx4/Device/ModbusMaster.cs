@@ -442,7 +442,7 @@ namespace NModbus.Device
 
         private Task<bool[]> PerformReadDiscretesAsync(ReadCoilsInputsRequest request)
         {
-            return Task.Factory.StartNew(() => PerformReadDiscretes(request));
+            return TaskEx.Run<bool[]>(() => PerformReadDiscretes(request));
         }
 
         private ushort[] PerformReadRegisters(ReadHoldingInputRegistersRequest request)
@@ -455,7 +455,7 @@ namespace NModbus.Device
 
         private Task<ushort[]> PerformReadRegistersAsync(ReadHoldingInputRegistersRequest request)
         {
-            return Task.Factory.StartNew(() => PerformReadRegisters(request));
+            return TaskEx.Run<ushort[]>(() => PerformReadRegisters(request));
         }
 
         private ushort[] PerformReadRegisters(ReadWriteMultipleRegistersRequest request)
@@ -468,13 +468,13 @@ namespace NModbus.Device
 
         private Task<ushort[]> PerformReadRegistersAsync(ReadWriteMultipleRegistersRequest request)
         {
-            return Task.Factory.StartNew(() => PerformReadRegisters(request));
+            return TaskEx.Run<ushort[]>(() => PerformReadRegisters(request));
         }
 
         private Task PerformWriteRequestAsync<T>(IModbusMessage request)
             where T : IModbusMessage, new()
         {
-            return Task.Factory.StartNew(() => Transport.UnicastMessage<T>(request));
+            return TaskEx.Run(() => Transport.UnicastMessage<T>(request));
         }
     }
 }

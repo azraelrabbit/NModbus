@@ -77,7 +77,7 @@ namespace NModbus.Device
                 }
             }
 
-            return Task.Factory.StartNew(()=> { }) ;
+            return TaskEx.FromResult(false);// Task.Factory.StartNew(()=> { }) ;
         }
     }
 }

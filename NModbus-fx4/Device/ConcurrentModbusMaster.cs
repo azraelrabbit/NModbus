@@ -35,25 +35,34 @@
         {
             int difference = (int)(_minInterval - _stopwatch.Elapsed).TotalMilliseconds;
 
-            //if (difference > 0)
-            //{
-            //    return Task.Delay(difference, cancellationToken);
-            //}
-
             if (difference > 0)
             {
-                return Task.Factory.StartNew(() => {
-
-                    Thread.Sleep(difference);
-
-
-                });// difference, cancellationToken);
+                return TaskEx.Delay(difference, cancellationToken);
             }
 
-            return Task.Factory.StartNew(()=> { });
+            return CompletedTask();
+
+            //if (difference > 0)
+            //{
+            //    return Task.Factory.StartNew(() => {
+
+            //        Thread.Sleep(difference);
+
+
+            //    });// difference, cancellationToken);
+            //}
+
+            //return Task.Factory.StartNew(()=> { });
         }
 
- 
+#if NET45|| NET40
+        private static readonly Task completedTask = TaskEx.FromResult(false);
+
+        public static Task CompletedTask()
+        {
+            return completedTask;
+        }
+#endif
 
         private async Task<T> PerformFuncAsync<T>(Func<Task<T>> action, CancellationToken cancellationToken)
         {
@@ -96,7 +105,7 @@
                     //If we're _not_ on the first run through here, wait for the min time
                     if (soFar > 0)
                     {
-                        await TaskHelper.Delay(_minInterval, cancellationToken);
+                        await TaskEx.Delay(_minInterval, cancellationToken);
                     }
 
                     //Check to see if we've ben cancelled
@@ -136,7 +145,7 @@
                     //If we're _not_ on the first run through here, wait for the min time
                     if (soFar > 0)
                     {
-                        await TaskHelper.Delay(_minInterval, cancellationToken);
+                        await TaskEx.Delay(_minInterval, cancellationToken);
                     }
 
                     //Check to see if we've ben cancelled
@@ -174,7 +183,7 @@
                     //If we're _not_ on the first run through here, wait for the min time
                     if (soFar > 0)
                     {
-                        await TaskHelper.Delay(_minInterval, cancellationToken);
+                        await TaskEx.Delay(_minInterval, cancellationToken);
                     }
 
                     if (thisWrite > (data.Length - soFar))
