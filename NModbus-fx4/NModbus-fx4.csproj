@@ -31,10 +31,12 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net40|AnyCPU'">
 		<TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+		<DefineConstants>TRACE;NET45;NET40;</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
 		<TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+		<DefineConstants>TRACE;NET45;NET40;</DefineConstants>
 	</PropertyGroup>
  
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
